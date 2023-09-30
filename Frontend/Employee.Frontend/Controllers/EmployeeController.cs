@@ -1,5 +1,6 @@
 ﻿using Employee.Frontend.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Text.Json;
 
@@ -56,6 +57,20 @@ public class EmployeeController : Controller
 
     public async Task<IActionResult> AddOrEdit(int Id)
     {
+        var response = await _httpClient.GetAsync("Country");
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            var countryList = JsonConvert.DeserializeObject<List<Country>>(content);
+            ViewData["countryId"] = new SelectList(countryList,"Id","CountryName");
+        }
+        var response2 = await _httpClient.GetAsync("State");
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            var stateList = JsonConvert.DeserializeObject<List<State>>(content);
+            ViewData["stateId"] = new SelectList(stateList, "Id", "StateName");
+        }
         if (Id == 0)
         {
             return View(new Employees());
