@@ -38,7 +38,7 @@ public class StateController : APIControllerBase
         return await HandleCommandAsync(new UpdateStateCommand(id, state));
     }
 
-    [HttpDelete]
+    [HttpDelete("{id:int}")]
     public async Task<ActionResult<VMCountry>> DeleteState(int id)
     {
         return await HandleCommandAsync(new DeleteStateCommand(id));

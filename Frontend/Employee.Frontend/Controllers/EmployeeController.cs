@@ -65,9 +65,9 @@ public class EmployeeController : Controller
             ViewData["countryId"] = new SelectList(countryList,"Id","CountryName");
         }
         var response2 = await _httpClient.GetAsync("State");
-        if (response.IsSuccessStatusCode)
+        if (response2.IsSuccessStatusCode)
         {
-            var content = await response.Content.ReadAsStringAsync();
+            var content = await response2.Content.ReadAsStringAsync();
             var stateList = JsonConvert.DeserializeObject<List<State>>(content);
             ViewData["stateId"] = new SelectList(stateList, "Id", "StateName");
         }
@@ -84,6 +84,44 @@ public class EmployeeController : Controller
             }
         }
         return View(new Employees());
+    }
+
+    [HttpPost]
+    [AutoValidateAntiforgeryToken]
+    public async Task<IActionResult> AddOrEdit(int Id, Employees employees)
+    {
+
+        if (ModelState.IsValid)
+        {
+            if (Id == 0)
+            {
+                var result = await _httpClient.PostAsJsonAsync("Employee", employees);
+
+                if (result.IsSuccessStatusCode) return RedirectToAction("Index");
+
+            }
+            else
+            {
+                var result = await _httpClient.PutAsJsonAsync($"Employee/{Id}", employees);
+                if (result.IsSuccessStatusCode) { return RedirectToAction("Index"); }
+            }
+
+        }
+        return View(new Country());
+
+    }
+
+    public async Task<IActionResult> Delete(int Id)
+    {
+        var data = await _httpClient.DeleteAsync($"Employee/{Id}");
+        if (data.IsSuccessStatusCode)
+        {
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return NotFound();
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Employee.Frontend.Models.Country>
+﻿@model IEnumerable<Employee.Frontend.Models.State>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CountryName)
+                @Html.DisplayNameFor(model => model.StateName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Currency)
+                @Html.DisplayNameFor(model => model.CountryName)
             </th>
             <th></th>
         </tr>
@@ -31,23 +31,25 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.StateName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.CountryName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency)
-            </td>
-            <td>
-                <a class="btn btn-success" href="Country/AddOrEdit/@item.Id">Edit</a>
-            </td>
+
                 <td>
-                    <a class="btn btn-danger" href="Country/Delete/@item.Id" onclick="return confirm('Are You Sure? you want to delete this item?')">Delete</a>
+                    <a class="btn btn-success" href="State/AddOrEdit/@item.Id">Edit</a>
                 </td>
+                <td>
+                    <a class="btn btn-danger" href="State/Delete/@item.Id" onclick="return confirm('Are You Sure? you want to delete this item?')">Delete</a>
+                </td>
+
 @*            <td>
-                    @Html.ActionLink("Edit", "AddOrEdit", new { @item.Id }) |
+                @Html.ActionLink("Edit", "AddOrEdit", new { @item.Id }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { @item.Id})
             </td>*@
         </tr>
-         }
+}
     </tbody>
 </table>

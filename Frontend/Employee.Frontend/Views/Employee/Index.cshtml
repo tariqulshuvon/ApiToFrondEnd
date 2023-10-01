@@ -31,10 +31,10 @@
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CountryId)
+                @Html.DisplayNameFor(model => model.CountryName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StateId)
+                @Html.DisplayNameFor(model => model.StateName)
             </th>
             <th></th>
         </tr>
@@ -61,16 +61,23 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CountryId)
+                @Html.DisplayFor(modelItem => item.CountryName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StateId)
+                @Html.DisplayFor(modelItem => item.StateName)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+
+                <td>
+                    <a class="btn btn-success" href="Employee/AddOrEdit/@item.Id">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" href="Employee/Delete/@item.Id" onclick="return confirm('Are You Sure? you want to delete this item?')">Delete</a>
+                </td>
+@*            <td>
+                @Html.ActionLink("Edit", "AddOrEdit", new { @item.Id }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+                @Html.ActionLink("Delete", "Delete", new { @item.Id})
+            </td>*@
         </tr>
 }
     </tbody>

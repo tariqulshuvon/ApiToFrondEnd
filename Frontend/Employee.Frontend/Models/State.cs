@@ -7,6 +7,8 @@
         public int CountryId { get; set; }
         public Country? Country { get; set; }
 
+        public string? CountryName { get; set; } 
+
         public ICollection<Employees> Employee { get; set; } = new HashSet<Employees>();
     }
 }
